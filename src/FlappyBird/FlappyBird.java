@@ -22,6 +22,8 @@ public class FlappyBird implements ActionListener, MouseListener, KeyListener {
 
     public int ticks, yMotion, score;
 
+    public int highScore = 0;
+
     public boolean gameOver, started;
 
     public Random rand;
@@ -162,6 +164,13 @@ public class FlappyBird implements ActionListener, MouseListener, KeyListener {
 
         }
             renderer.repaint();
+
+        if (gameOver) {
+            if (score > highScore) {
+                highScore = score;
+            }
+        }
+
     }
 
     public void repaint(Graphics g) {
@@ -193,7 +202,11 @@ public class FlappyBird implements ActionListener, MouseListener, KeyListener {
         }
 
         if (started || gameOver) {
+            g.setFont(new Font("Arial", 1, 100));
             g.drawString(String.valueOf(score), WIDTH / 2 - 25, 100);
+
+            g.setFont(new Font("Arial", 1, 25));
+            g.drawString("High Score: " + String.valueOf(highScore), WIDTH / 2 - 75, 22);
         }
 
     }
